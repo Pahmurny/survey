@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import './App.scss';
 
 import AppHeader from './components/AppHeader/AppHeader';
-import AppBody from './components/AppBody/AppBody';
-import Login from './components/Login/Login';
+import AppRouter from './components/AppRouter/AppRouter';
+// import AppBody from './components/AppBody/AppBody';
+// import Login from './components/Login/Login';
+
 
 class App extends Component {
   constructor(props) {
@@ -17,6 +20,7 @@ class App extends Component {
 
   handleLoginClick(e) {
     this.setState({ isLoggedIn: true });
+    this.props.history.push('/');
   }
 
   handleLogoutClick(e) {
@@ -25,13 +29,15 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <AppHeader
-          isLoggedIn={this.state.isLoggedIn}
-          onLogoutClick={this.handleLogoutClick}
-        />
-        {this.state.isLoggedIn ? (<AppBody />) : (<Login onLoginClick={this.handleLoginClick} />)}
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <AppHeader
+            isLoggedIn={this.state.isLoggedIn}
+            onLogoutClick={this.handleLogoutClick}
+          />
+          <AppRouter />
+        </div>
+      </BrowserRouter>
     );
   }
 }

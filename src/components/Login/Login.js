@@ -30,7 +30,9 @@ class Login extends Component {
   }
 
   handleSubmit(e) {
-    this.props.onLoginClick(e.target.value);
+    e.preventDefault();
+    this.props.history.push('/');
+    // this.props.onLoginClick(e.target.value);
   }
 
   render() {

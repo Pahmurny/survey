@@ -1,0 +1,13 @@
+.AppRouter {
+  display: flex;
+  flex-wrap: nowrap;
+}
+.AppRouter_menu {
+  order: 0;
+  flex: 0 1 auto;
+}
+.AppRouter_content {
+  order: 0;
+  flex: 1 1 auto;
+  padding: 20px;
+}
