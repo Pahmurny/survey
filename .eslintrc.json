@@ -1,0 +1,18 @@
+{
+  "extends": "airbnb",
+  "rules" :{
+    "object-shorthand": ["error", "consistent"],
+    "no-else-return": ["off"],
+    "no-plusplus": ["off"],
+    "arrow-body-style": ["off"],
+    "prefer-promise-reject-errors": ["off"],
+    "no-underscore-dangle": ["off"],
+    "no-unused-vars": ["error", { "argsIgnorePattern": "next" }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prefer-stateless-function": "off"
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  }
+}
