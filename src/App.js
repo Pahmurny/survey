@@ -4,9 +4,6 @@ import './App.scss';
 
 import AppHeader from './components/AppHeader/AppHeader';
 import AppRouter from './components/AppRouter/AppRouter';
-// import AppBody from './components/AppBody/AppBody';
-// import Login from './components/Login/Login';
-
 
 class App extends Component {
   constructor(props) {
