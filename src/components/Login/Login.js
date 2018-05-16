@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
-import PropTypes from 'prop-types';
+
+import { userLogin } from '../../actions/userActions';
 
 import './Login.scss';
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.name,
+    isLoggedIn: state.user.isLoggedIn,
+  };
+};
 
 class Login extends Component {
   constructor(props) {
@@ -31,12 +41,13 @@ class Login extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.history.push('/');
-    // this.props.onLoginClick(e.target.value);
+    // this.props.onLogin(this.state.login);
+    this.props.dispatch(userLogin(this.state.login, this.state.password));
   }
 
   render() {
     return (
+      this.props.isLoggedIn ? <Redirect to="" /> :
       <div className="Login">
         <form onSubmit={this.handleSubmit}>
           <h1>Log in to your account</h1>
@@ -69,12 +80,4 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
-  onLoginClick: PropTypes.func,
-};
-
-Login.defaultProps = {
-  onLoginClick: null,
-};
-
-export default Login;
+export default connect(mapStateToProps)(Login);

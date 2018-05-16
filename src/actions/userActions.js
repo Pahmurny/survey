@@ -1,18 +1,39 @@
-function userLogin() {
-  return {
-    type: 'USER_LOGIN',
-    payload: 'John Doe',
-  };
-}
+import axios from 'axios';
 
-function userLogout() {
+import { API_URL } from '../constants';
+
+export const USER_LOGOUT = 'USER_LOGOUT';
+export const USER_LOGIN = 'USER_LOGIN';
+
+export const userLogout = () => {
   return {
-    type: 'USER_LOGIN',
+    type: USER_LOGOUT,
     payload: null,
   };
+};
+
+function postLoginUser(login, pass) {
+  return axios.get(`${API_URL}/`)
+    .then((response) => {
+      return response.data;
+    });
 }
 
+export const userLogin = (login, pass) => {
+  return {
+    type: USER_LOGIN,
+    payload: postLoginUser(login, pass),
+  };
+};
+
+export const userLoginOld = (payload) => {
+  return {
+    type: USER_LOGIN,
+    payload: payload,
+  };
+};
+
 export default {
-  userLogin,
   userLogout,
+  userLogin,
 };

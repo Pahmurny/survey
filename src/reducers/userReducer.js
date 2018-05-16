@@ -1,6 +1,6 @@
 export default function reducer(state = {
-  name: null,
-  isLoggedIn: false,
+  name: 'Testo',
+  isLoggedIn: true,
 }, action) {
   switch (action.type) {
     case 'USER_LOGIN': {
