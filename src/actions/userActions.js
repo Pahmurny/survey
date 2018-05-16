@@ -13,7 +13,12 @@ export const userLogout = () => {
 };
 
 function postLoginUser(login, pass) {
-  return axios.get(`${API_URL}/`)
+  return axios.post(`http://${API_URL}/auth`, {}, {
+    auth: {
+      username: login,
+      password: pass,
+    },
+  })
     .then((response) => {
       return response.data;
     });

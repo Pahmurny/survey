@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
-import userActions from '../../actions/userActions';
+import { userLogout } from '../../actions/userActions';
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user.name,
+    user: state.user.user,
     isLoggedIn: state.user.isLoggedIn,
   };
 };
@@ -19,12 +19,10 @@ class AppHeader extends Component {
   }
 
   handleLogoutClick(e) {
-    console.log(userActions.userLogout);
-    this.props.dispatch(userActions.userLogout());
+    this.props.dispatch(userLogout());
   }
 
   render() {
-    console.log('Header props: ', this.props);
     return (
       <Navbar style={{ marginBottom: '0' }} inverse collapseOnSelect staticTop fluid>
         <Navbar.Header>
@@ -36,7 +34,7 @@ class AppHeader extends Component {
         <Navbar.Collapse>
           <Nav pullRight>
             { this.props.isLoggedIn ? (
-              <NavDropdown eventKey={4} title={`Hello, ${this.props.user}`} id="basic-nav-dropdown">
+              <NavDropdown eventKey={4} title={`Hello, ${this.props.user.name}`} id="basic-nav-dropdown">
                 <MenuItem eventKey={4.1} onClick={this.handleLogoutClick}>Logout</MenuItem>
               </NavDropdown>
             ) : (

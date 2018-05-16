@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './AppRouter.scss';
 
+import Home from '../Home/Home';
 import Login from '../Login/Login';
 import BodyMenu from '../BodyMenu/BodyMenu';
 import MySurveys from '../MySurveys/MySurveys';
@@ -10,45 +12,101 @@ import NewSurvey from '../NewSurvey/NewSurvey';
 import SurveyTemplates from '../SurveyTemplates/SurveyTemplates';
 import Users from '../Users/Users';
 
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.user.isLoggedIn,
+  };
+};
 
-const newSurvey = () => (
+
+const RouteNewSurvey = () => (
   <div className="AppRouter">
     <BodyMenu className="AppRouter_menu" />
     <NewSurvey className="AppRouter_content" />
   </div>
 );
 
-const mySurveys = () => (
+const RouteMySurveys = () => (
   <div className="AppRouter">
     <BodyMenu className="AppRouter_menu" />
     <MySurveys className="AppRouter_content" />
   </div>
 );
 
-const surveyTemplates = () => (
+const RouteSurveyTemplates = () => (
   <div className="AppRouter">
     <BodyMenu className="AppRouter_menu" />
     <SurveyTemplates className="AppRouter_content" />
   </div>
 );
 
-const users = () => (
+const RouteUsers = () => (
   <div className="AppRouter">
     <BodyMenu className="AppRouter_menu" />
     <Users className="AppRouter_content" />
   </div>
 );
 
-const AppRouter = () => (
+const LoggedInRoutes = () => (
   <Switch>
     <Route exact path="/" render={() => (<Redirect to="/my-surveys" />)} />
-    <Route path="/new-survey" render={newSurvey} />
-    <Route path="/my-surveys" render={mySurveys} />
-    <Route path="/templates" render={surveyTemplates} />
-    <Route path="/users" render={users} />
+    <Route path="/new-survey" render={RouteNewSurvey} />
+    <Route path="/my-surveys" render={RouteMySurveys} />
+    <Route path="/templates" render={RouteSurveyTemplates} />
+    <Route path="/users" render={RouteUsers} />
     <Route path="/login" component={Login} />
-    <Route path="*" exact render={() => (<Redirect to="/my-surveys" />)} />
+    <Route path="*" render={() => (<Redirect to="/my-surveys" />)} />
   </Switch>
 );
 
+const GuestRoutes = () => (
+  <Switch>
+    <Route exact path="/" component={Home} />
+    <Route path="/login" component={Login} />
+    <Route path="*" render={() => (<Redirect to="/" />)} />
+  </Switch>
+);
+
+// const AppRouter = ({ isLoggedIn }) => (
+//   <div>
+//     {isLoggedIn ? <LoggedInRoutes /> : <GuestRoutes />}
+//   </div>
+// );
+
+// const AppRouter = ({ isLoggedIn }) => (
+//   <Switch>
+
+//     {isLoggedIn ? (<Route exact path="/" render={() => (<Redirect to="/my-surveys" />)} />) :
+//     (<Route exact path="/" render={Home} />)}
+
+//     {isLoggedIn && <Route path="/new-survey" render={RouteNewSurvey} />}
+
+//     {isLoggedIn && <Route path="/my-surveys" render={RouteMySurveys} />}
+
+//     {isLoggedIn && <Route path="/templates" render={RouteSurveyTemplates} />}
+
+//     {isLoggedIn && <Route path="/users" render={RouteUsers} />}
+
+//     <Route path="/login" component={Login} />
+
+//     {isLoggedIn ? (<Route exact path="*" render={() => (<Redirect to="/my-surveys" />)} />) :
+//     (<Route exact path="/" render={() => (<Redirect to="/" />)} />)}
+
+//   </Switch>
+// );
+
+const AppRouter = ({ isLoggedIn }) => (
+  <Switch>
+    <Route exact path="/" render={() => (<Redirect to="/my-surveys" />)} />
+    <Route path="/new-survey" render={RouteNewSurvey} />
+    <Route path="/my-surveys" render={RouteMySurveys} />
+    <Route path="/templates" render={RouteSurveyTemplates} />
+    <Route path="/users" render={RouteUsers} />
+    <Route path="/login" component={Login} />
+    <Route path="*" render={() => (<Redirect to="/my-surveys" />)} />
+  </Switch>
+);
+
+
+// export default connect(mapStateToProps)(AppRouter);
 export default AppRouter;
