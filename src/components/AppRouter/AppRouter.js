@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import './AppRouter.scss';
 
@@ -67,46 +68,10 @@ const GuestRoutes = () => (
   </Switch>
 );
 
-// const AppRouter = ({ isLoggedIn }) => (
-//   <div>
-//     {isLoggedIn ? <LoggedInRoutes /> : <GuestRoutes />}
-//   </div>
-// );
-
-// const AppRouter = ({ isLoggedIn }) => (
-//   <Switch>
-
-//     {isLoggedIn ? (<Route exact path="/" render={() => (<Redirect to="/my-surveys" />)} />) :
-//     (<Route exact path="/" render={Home} />)}
-
-//     {isLoggedIn && <Route path="/new-survey" render={RouteNewSurvey} />}
-
-//     {isLoggedIn && <Route path="/my-surveys" render={RouteMySurveys} />}
-
-//     {isLoggedIn && <Route path="/templates" render={RouteSurveyTemplates} />}
-
-//     {isLoggedIn && <Route path="/users" render={RouteUsers} />}
-
-//     <Route path="/login" component={Login} />
-
-//     {isLoggedIn ? (<Route exact path="*" render={() => (<Redirect to="/my-surveys" />)} />) :
-//     (<Route exact path="/" render={() => (<Redirect to="/" />)} />)}
-
-//   </Switch>
-// );
-
 const AppRouter = ({ isLoggedIn }) => (
-  <Switch>
-    <Route exact path="/" render={() => (<Redirect to="/my-surveys" />)} />
-    <Route path="/new-survey" render={RouteNewSurvey} />
-    <Route path="/my-surveys" render={RouteMySurveys} />
-    <Route path="/templates" render={RouteSurveyTemplates} />
-    <Route path="/users" render={RouteUsers} />
-    <Route path="/login" component={Login} />
-    <Route path="*" render={() => (<Redirect to="/my-surveys" />)} />
-  </Switch>
+  <div>
+    {isLoggedIn ? <LoggedInRoutes /> : <GuestRoutes />}
+  </div>
 );
 
-
-// export default connect(mapStateToProps)(AppRouter);
-export default AppRouter;
+export default withRouter(connect(mapStateToProps)(AppRouter));
