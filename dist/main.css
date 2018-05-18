@@ -1,0 +1,5 @@
+
+.AppRouter{display:flex;flex-wrap:nowrap}.AppRouter_menu{order:0;flex:0 1 auto}.AppRouter_content{order:0;flex:1 1 auto;padding:20px}
+.Login,.Login form{display:flex;justify-content:center}.Login form{box-shadow:2px 2px 5px 0 rgba(0,0,0,.5);max-width:500px;width:500px;padding:30px;flex-direction:column;align-items:center}.Login form .form-group{width:80%}.Login form button{width:150px}
+.SignUp,.SignUp form{display:flex;justify-content:center}.SignUp form{box-shadow:2px 2px 5px 0 rgba(0,0,0,.5);max-width:500px;width:500px;padding:30px;flex-direction:column;align-items:center}.SignUp form .form-group{width:80%}.SignUp form button{width:150px}
+.BodyMenu{border:1px solid #000}.BodyMenu_link{box-shadow:2px 2px 5px 0 rgba(0,0,0,.5);padding:5px;margin:20px 0;cursor:pointer}

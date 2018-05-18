@@ -4,6 +4,8 @@ import { API_URL } from '../constants';
 
 export const USER_LOGOUT = 'USER_LOGOUT';
 export const USER_LOGIN = 'USER_LOGIN';
+export const USER_SIGNUP = 'USER_SIGNUP';
+export const USER_CHECK = 'USER_CHECK';
 
 export const userLogout = () => {
   return {
@@ -12,11 +14,11 @@ export const userLogout = () => {
   };
 };
 
-function postLoginUser(login, pass) {
+function postLoginUser(email, password) {
   return axios.post(`http://${API_URL}/auth`, {}, {
     auth: {
-      username: login,
-      password: pass,
+      username: email,
+      password: password,
     },
   })
     .then((response) => {
@@ -24,21 +26,54 @@ function postLoginUser(login, pass) {
     });
 }
 
-export const userLogin = (login, pass) => {
+export const userLogin = (email, password) => {
   return {
     type: USER_LOGIN,
-    payload: postLoginUser(login, pass),
+    payload: postLoginUser(email, password),
   };
 };
 
-export const userLoginOld = (payload) => {
+function postSignupUser(email, password, name) {
+  return axios.post(`http://${API_URL}/users`, {
+    email,
+    password,
+    name,
+  }, {})
+    .then((response) => {
+      return response.data;
+    });
+}
+
+export const userSignup = (email, password, name) => {
   return {
-    type: USER_LOGIN,
-    payload: payload,
+    type: USER_SIGNUP,
+    payload: postSignupUser(email, password, name),
   };
 };
+
+function getUserInfo() {
+  const token = localStorage.getItem('jwtToken');
+  return axios.get(`http://${API_URL}/users/me`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => {
+      return response.data;
+    });
+}
+
+export const checkUserToken = () => {
+  return {
+    type: USER_CHECK,
+    payload: getUserInfo(),
+  };
+};
+
 
 export default {
+  userSignup,
   userLogout,
   userLogin,
+  checkUserToken,
 };

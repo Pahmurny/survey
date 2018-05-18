@@ -1,11 +1,13 @@
 .BodyMenu {
-  border: 1px solid black;
-  // padding: 20px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  width: 250px;
+  .nav {
+    padding: 20px 0;
+  }
+  .nav-pills>li>a {
+    border-radius: 0px;
+  }
 }
 
-.BodyMenu_link {
-  box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
-  padding: 5px;
-  margin: 20px 0px;
-  cursor: pointer;
-}

@@ -1,10 +1,14 @@
 .AppRouter {
   display: flex;
+  flex-direction: row;
   flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: flex-start;
 }
 .AppRouter_menu {
   order: 0;
-  flex: 0 1 auto;
+  flex: 0 0 auto;
 }
 .AppRouter_content {
   order: 0;

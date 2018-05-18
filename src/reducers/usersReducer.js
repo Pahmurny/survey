@@ -9,7 +9,7 @@ export default function reducer(state = {
     }
     case 'USERS_FULFILLED': {
       console.log('Action payload', action.payload);
-      return { ...state, users: action.payload, isRecieved: false };
+      return { ...state, users: action.payload, isRecieved: true };
     }
     case 'USERS_REJECTED': {
       console.log('Error while getting users list');

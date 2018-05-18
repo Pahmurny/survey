@@ -1,10 +1,17 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
 
 const env = process.env.NODE_ENV;
 
 module.exports = {
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'index_bundle.js',
+    publicPath: '/',
+  },
   devServer: {
+    publicPath: '/',
     historyApiFallback: true,
   },
   module: {
@@ -51,8 +58,6 @@ module.exports = {
       filename: './index.html',
     }),
     new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
       filename: '[name].css',
       chunkFilename: '[id].css',
     }),

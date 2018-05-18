@@ -3,19 +3,18 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 
-import { userLogin } from '../../actions/userActions';
+import { userSignup } from '../../actions/userActions';
 
-import './Login.scss';
+import './SignUp.scss';
 import '../../styles/common.scss';
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user.name,
     isLoggedIn: state.user.isLoggedIn,
   };
 };
 
-class Login extends Component {
+class SignUp extends Component {
   constructor(props) {
     super(props);
 
@@ -24,6 +23,7 @@ class Login extends Component {
 
     this.state = {
       email: '',
+      name: '',
       password: '',
     };
   }
@@ -35,22 +35,33 @@ class Login extends Component {
   handleSubmit(e) {
     e.preventDefault();
     // this.props.onLogin(this.state.login);
-    this.props.dispatch(userLogin(this.state.email, this.state.password));
+    this.props.dispatch(userSignup(this.state.email, this.state.password, this.state.name));
   }
 
   render() {
     return (
       this.props.isLoggedIn ? <Redirect to="" /> :
-      <div className="Login signform">
+      <div className="SignUp signform">
         <form onSubmit={this.handleSubmit}>
-          <h1>Log in to your account</h1>
-          <FormGroup controlId="login-input">
+          <h1>Create a FREE account</h1>
+          <FormGroup controlId="email-input">
             <ControlLabel>Email</ControlLabel>
             <FormControl
               name="email"
               type="email"
-              value={this.state.login}
-              placeholder="Enter login"
+              value={this.state.email}
+              placeholder="Enter email"
+              onChange={this.handleChange}
+            />
+            <FormControl.Feedback />
+          </FormGroup>
+          <FormGroup controlId="name-input">
+            <ControlLabel>Name</ControlLabel>
+            <FormControl
+              name="name"
+              type="text"
+              value={this.state.name}
+              placeholder="Enter your name"
               onChange={this.handleChange}
             />
             <FormControl.Feedback />
@@ -66,11 +77,11 @@ class Login extends Component {
             />
             <FormControl.Feedback />
           </FormGroup>
-          <Button bsStyle="primary" type="submit">LOG IN</Button>
+          <Button bsStyle="primary" type="submit">CREATE ACCOUNT</Button>
         </form>
       </div>
     );
   }
 }
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps)(SignUp);

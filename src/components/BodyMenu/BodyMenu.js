@@ -1,11 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
+import { withRouter } from 'react-router-dom';
 import { Nav, NavItem } from 'react-bootstrap';
 
 import './BodyMenu.scss';
 
-const BodyMenu = ({ className }) => (
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.user,
+    isLoggedIn: state.user.isLoggedIn,
+  };
+};
+
+
+const BodyMenu = ({ className, user }) => (
   <div className={`${className} BodyMenu`}>
     <Nav bsStyle="pills" stacked activeKey={1}>
       <LinkContainer to="/new-survey">
@@ -23,23 +32,15 @@ const BodyMenu = ({ className }) => (
           Templates
         </NavItem>
       </LinkContainer>
+      { user.role === 'admin' &&
       <LinkContainer to="/users">
         <NavItem eventKey={4} >
           Users
         </NavItem>
       </LinkContainer>
+      }
     </Nav>
   </div>
 );
 
-
-BodyMenu.propTypes = {
-  className: PropTypes.string,
-};
-
-BodyMenu.defaultProps = {
-  className: '',
-};
-
-
-export default BodyMenu;
+export default withRouter(connect(mapStateToProps)(BodyMenu));

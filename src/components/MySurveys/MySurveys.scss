@@ -1,0 +1,19 @@
+.MySurveys {
+
+}
+
+.MySurveys-surveysTable {
+  width: 100%;
+  tr {
+    padding: 5px 0px;
+  }
+  tr:hover:not(.MySurveys-surveysTableHeader) {
+    background: #eee;
+  }
+  td {
+    padding: 5px 0px;
+  }
+}
+.MySurveys-surveysTableHeader {
+  background: #ccc;
+}
