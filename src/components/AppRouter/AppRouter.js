@@ -13,6 +13,7 @@ import NewSurvey from '../NewSurvey/NewSurvey';
 import SurveyEdit from '../SurveyEdit/SurveyEdit';
 import SurveyTemplates from '../SurveyTemplates/SurveyTemplates';
 import Users from '../Users/Users';
+import EditTools from '../EditTools/EditTools';
 
 const mapStateToProps = (state) => {
   return {
@@ -54,6 +55,7 @@ const RouteSurveyEdit = () => (
   <div className="AppRouter">
     <BodyMenu className="AppRouter_menu" />
     <SurveyEdit className="AppRouter_content" />
+    <EditTools className="AppRouter_tools" />
   </div>
 );
 

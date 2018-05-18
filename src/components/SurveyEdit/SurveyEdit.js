@@ -20,10 +20,10 @@ class SurveyEdit extends Component {
 
   render() {
     console.log('props', this.props);
-    const { props: { match: { params: { surveyId } }, activeSurvey } } = this;
+    const { props: { activeSurvey } } = this;
     return (
       <div className={`${this.props.className} SurveyEdit datapanel`}>
-        Edit Survey {surveyId}
+        Edit Survey
         <div>{activeSurvey.title}</div>
       </div>
     );

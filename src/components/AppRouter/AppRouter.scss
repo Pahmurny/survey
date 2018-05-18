@@ -11,7 +11,11 @@
   flex: 0 0 auto;
 }
 .AppRouter_content {
-  order: 0;
+  order: 1;
   flex: 1 1 auto;
   padding: 20px;
+}
+.AppRouter_tools {
+  order: 2;
+  flex: 0 0 auto;
 }

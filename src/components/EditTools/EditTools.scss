@@ -1,0 +1,21 @@
+.EditTools {
+  width: 250px;
+  margin: 20px 20px 0px 0px;;
+  padding: 0px;
+}
+.QuestionsTypes, .SurveySettings {
+  width: 100%;
+  // padding: 20px;
+  margin-bottom: 20px;
+  background: white;
+  box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
+}
+.QuestionsTypes-header, .SurveySettings-header {
+  padding: 10px;
+  background: #eee;
+}
+
+.QuestionsTypes-content, .SurveySettings-content {
+  padding: 10px;
+
+}
