@@ -1,0 +1,22 @@
+.SurveyPage {
+  border: 1px solid #ddd;
+  border-top: none;
+  padding: 10px;
+  position: relative;
+}
+.SurveyPage__Delete {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.SurveyEdit__AddPage {
+  float: right;
+}
+
+
+.SurveyEdit__controls {
+  padding: 20px 0px;
+  button:not(:first-child):not(:last-child) {
+    margin: 0px 1px;
+  }
+}

@@ -5,11 +5,14 @@ import { getSurveyById } from '../../actions/surveysActions';
 
 import './SurveyEdit.scss';
 
+import EditContent from './EditContent/EditContent';
 
 const mapStateToProps = (state) => {
   return {
     activeSurvey: state.surveys.activeSurvey,
-    isRecieved: state.users.isRecieved,
+    activeSurveyPages: state.surveys.activeSurveyPages,
+    isRecieved: state.surveys.isRecieved,
+    activeSurveyPage: state.surveys.activeSurveyPage,
   };
 };
 
@@ -19,12 +22,18 @@ class SurveyEdit extends Component {
   }
 
   render() {
-    console.log('props', this.props);
-    const { props: { activeSurvey } } = this;
+    console.log('updating:', this.props);
+    const { props: { isRecieved } } = this;
+
+    const editContent = isRecieved ? (
+      <EditContent />
+    ) : (
+      <div> LOADING... </div>
+    );
+
     return (
       <div className={`${this.props.className} SurveyEdit datapanel`}>
-        Edit Survey
-        <div>{activeSurvey.title}</div>
+        { editContent }
       </div>
     );
   }

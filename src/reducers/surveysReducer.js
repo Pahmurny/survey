@@ -1,8 +1,18 @@
-import { GET_SURVEYS, GET_SURVEY_BY_ID, CREATE_SURVEY, DELETE_SURVEY } from '../actions/surveysActions';
+import {
+  GET_SURVEYS,
+  GET_SURVEY_BY_ID,
+  CREATE_SURVEY,
+  DELETE_SURVEY,
+  ADD_SURVEY_PAGE,
+  DELETE_SURVEY_PAGE,
+  SET_ACTIVE_SURVEY_PAGE,
+} from '../actions/surveysActions';
 
 export default function reducer(state = {
   surveys: [],
   activeSurvey: {},
+  activeSurveyPages: [],
+  activeSurveyPage: {},
   isFetching: false,
   isRecieved: false,
   error: null,
@@ -110,6 +120,35 @@ export default function reducer(state = {
           type: 'Error on deleting survey',
           message: action.payload,
         },
+      };
+    }
+    case `${ADD_SURVEY_PAGE}`: {
+      const newPage = {
+        order: action.payload,
+        title: `Page ${action.payload}`,
+      };
+      return {
+        ...state,
+        activeSurveyPages: [...state.activeSurveyPages, newPage],
+      };
+    }
+    case `${DELETE_SURVEY_PAGE}`: {
+      let newActivePages = [...state.activeSurveyPages.filter(page => page.order !== action.payload.order)];
+      if (newActivePages.length === 0) {
+        newActivePages = [{
+          order: 1,
+          title: 'Page 1',
+        }];
+      }
+      return {
+        ...state,
+        activeSurveyPages: newActivePages,
+      };
+    }
+    case `${SET_ACTIVE_SURVEY_PAGE}`: {
+      return {
+        ...state,
+        activeSurveyPage: state.activeSurveyPages.find(page => page.order === action.payload),
       };
     }
     default:
