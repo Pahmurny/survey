@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { notify } from 'reapop';
+
 import { API_URL } from '../constants';
 
 export const GET_SURVEYS = 'GET_SURVEYS';
@@ -47,7 +49,7 @@ export const getSurveyById = (id) => {
 };
 
 
-function createSurveyCall(survey) {
+function createSurveyCall(survey, dispatch) {
   return axios.post(`http://${API_URL}/surveys`, {
     survey,
   }, {
@@ -56,14 +58,19 @@ function createSurveyCall(survey) {
     },
   })
     .then((response) => {
+      dispatch(notify({ message: 'Created!', status: 200 }));
       return response.data;
+    })
+    .catch((error) => {
+      dispatch(notify({ message: 'Error while creating!', status: 400 }));
+      return Promise.reject(error);
     });
 }
 
-export const createSurvey = (survey) => {
+export const createSurvey = (survey, dispatch) => {
   return {
     type: CREATE_SURVEY,
-    payload: createSurveyCall(survey),
+    payload: createSurveyCall(survey, dispatch),
   };
 };
 
@@ -106,7 +113,7 @@ export const setActivePage = (order) => {
   };
 };
 
-function saveSurveyCall(survey) {
+function saveSurveyCall(survey, dispatch) {
   return axios.put(`http://${API_URL}/surveys`, {
     survey,
   }, {
@@ -115,14 +122,19 @@ function saveSurveyCall(survey) {
     },
   })
     .then((response) => {
+      dispatch(notify({ message: 'Saved', status: 200 }));
       return response.data;
+    })
+    .catch((error) => {
+      dispatch(notify({ message: 'Error While saving!', status: 400 }));
+      return Promise.reject(error);
     });
 }
 
-export const saveSurvey = (survey) => {
+export const saveSurvey = (survey, dispatch) => {
   return {
     type: SAVE_SURVEY,
-    payload: saveSurveyCall(survey),
+    payload: saveSurveyCall(survey, dispatch),
   };
 };
 

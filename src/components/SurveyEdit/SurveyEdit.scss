@@ -1,9 +1,14 @@
+.SurveyEdit {
+  min-width: 350px;
+}
+
 .SurveyPage {
   border: 1px solid #ddd;
   border-top: none;
   padding: 10px;
   position: relative;
 }
+
 .SurveyPage__Delete {
   position: absolute;
   top: 10px;

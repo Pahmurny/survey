@@ -7,6 +7,8 @@ import {
   DELETE_SURVEY_PAGE,
   SET_ACTIVE_SURVEY_PAGE,
 } from '../actions/surveysActions';
+import { guidGenerator } from './helper';
+
 
 export default function reducer(state = {
   surveys: [],
@@ -16,6 +18,7 @@ export default function reducer(state = {
   isFetching: false,
   isRecieved: false,
   error: null,
+  redirectTo: null,
 }, action) {
   switch (action.type) {
     case `${GET_SURVEYS}_PENDING`: {
@@ -49,6 +52,7 @@ export default function reducer(state = {
         ...state,
         isFetching: true,
         isRecieved: false,
+        redirectTo: null,
       };
     }
     case `${GET_SURVEY_BY_ID}_FULFILLED`: {
@@ -80,7 +84,7 @@ export default function reducer(state = {
     case `${CREATE_SURVEY}_FULFILLED`: {
       return {
         ...state,
-        activeSurvey: action.payload,
+        redirectTo: action.payload._id,
         isFetching: false,
         isRecieved: true,
       };
@@ -124,6 +128,7 @@ export default function reducer(state = {
     }
     case `${ADD_SURVEY_PAGE}`: {
       const newPage = {
+        _id: guidGenerator('page'),
         order: action.payload,
         title: `Page ${action.payload}`,
       };
@@ -136,6 +141,7 @@ export default function reducer(state = {
       let newActivePages = [...state.activeSurveyPages.filter(page => page.order !== action.payload.order)];
       if (newActivePages.length === 0) {
         newActivePages = [{
+          _id: guidGenerator('page'),
           order: 1,
           title: 'Page 1',
         }];

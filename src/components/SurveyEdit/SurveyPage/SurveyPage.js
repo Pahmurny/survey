@@ -5,6 +5,8 @@ import { Button, Glyphicon } from 'react-bootstrap';
 
 import { deletePage } from '../../../actions/surveysActions';
 
+import QuestionCanvas from './QuestionsCanvas/QuestionsCanvas';
+
 const mapStateToProps = (state) => {
   return {
     activeSurvey: state.surveys.activeSurvey,
@@ -27,10 +29,13 @@ class SurveyPage extends Component {
     const { props: { page } } = this;
     return (
       <div className="SurveyPage">
-        this is page { page.title }
-        <Button className="SurveyPage__Delete" bsSize="xsmall" bsStyle="danger" onClick={this.handleDeletePage}>
-          <Glyphicon glyph="trash" />
-        </Button>
+        <div style={{ padding: '10px' }}>
+          Page: { page.title }
+          <Button className="SurveyPage__Delete" bsSize="xsmall" bsStyle="danger" onClick={this.handleDeletePage}>
+            <Glyphicon glyph="trash" />
+          </Button>
+        </div>
+        <QuestionCanvas page={page} />
       </div>
     );
   }

@@ -52,7 +52,7 @@ class EditContent extends Component {
   }
 
   handleSaveClick() {
-    this.props.dispatch(saveSurvey(this.state.activeSurvey));
+    this.props.dispatch(saveSurvey(this.state.activeSurvey, this.props.dispatch));
   }
 
   handleTitleChange(e) {

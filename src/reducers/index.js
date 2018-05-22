@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-// import { routerReducer } from 'react-router-redux';
+import { reducer as notificationsReducer } from 'reapop';
 
 import user from './userReducer';
 import users from './usersReducer';
@@ -9,5 +9,5 @@ export default combineReducers({
   user: user,
   users: users,
   surveys: surveys,
-  // router: routerReducer,
+  notifications: notificationsReducer(),
 });
