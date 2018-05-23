@@ -7,10 +7,8 @@ export const GET_SURVEYS = 'GET_SURVEYS';
 export const GET_SURVEY_BY_ID = 'GET_SURVEY_BY_ID';
 export const CREATE_SURVEY = 'CREATE_SURVEY';
 export const DELETE_SURVEY = 'DELETE_SURVEY';
-export const ADD_SURVEY_PAGE = 'ADD_SURVEY_PAGE';
-export const DELETE_SURVEY_PAGE = 'DELETE_SURVEY_PAGE';
-export const SET_ACTIVE_SURVEY_PAGE = 'SET_ACTIVE_SURVEY_PAGE';
 export const SAVE_SURVEY = 'SAVE_SURVEY';
+
 
 function getSurveysCall() {
   return axios.get(`http://${API_URL}/surveys`, {
@@ -92,27 +90,6 @@ export const deleteSurvey = (surveyId) => {
   };
 };
 
-export const addPage = (order) => {
-  return {
-    type: ADD_SURVEY_PAGE,
-    payload: order,
-  };
-};
-
-export const deletePage = (page) => {
-  return {
-    type: DELETE_SURVEY_PAGE,
-    payload: page,
-  };
-};
-
-export const setActivePage = (order) => {
-  return {
-    type: SET_ACTIVE_SURVEY_PAGE,
-    payload: order,
-  };
-};
-
 function saveSurveyCall(survey, dispatch) {
   return axios.put(`http://${API_URL}/surveys`, {
     survey,
@@ -143,8 +120,5 @@ export default {
   getSurveyById,
   createSurvey,
   deleteSurvey,
-  addPage,
-  deletePage,
-  setActivePage,
   saveSurvey,
 };

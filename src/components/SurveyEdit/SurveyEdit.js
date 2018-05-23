@@ -11,9 +11,9 @@ import EditContent from './EditContent/EditContent';
 const mapStateToProps = (state) => {
   return {
     activeSurvey: state.surveys.activeSurvey,
-    activeSurveyPages: state.surveys.activeSurveyPages,
     isRecieved: state.surveys.isRecieved,
-    activeSurveyPage: state.surveys.activeSurveyPage,
+    activeSurveyPages: state.pages.activeSurveyPages,
+    activeSurveyPage: state.pages.activeSurveyPage,
   };
 };
 

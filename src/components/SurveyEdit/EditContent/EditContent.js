@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Form, Tabs, Tab, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
-import { addPage, setActivePage, saveSurvey } from '../../../actions/surveysActions';
+import { saveSurvey } from '../../../actions/surveysActions';
+import { addPage, setActivePage } from '../../../actions/pagesActions';
 
 import SurveyPage from '../SurveyPage/SurveyPage';
 
 const mapStateToProps = (state) => {
   return {
     activeSurvey: state.surveys.activeSurvey,
-    activeSurveyPages: state.surveys.activeSurveyPages,
     isRecieved: state.surveys.isRecieved,
-    activeSurveyPage: state.surveys.activeSurveyPage,
+    activeSurveyPages: state.pages.activeSurveyPages,
+    activeSurveyPage: state.pages.activeSurveyPage,
   };
 };
 
@@ -21,7 +22,6 @@ class EditContent extends Component {
     this.state = {
       activeSurvey: props.activeSurvey,
     };
-    console.log('STATE:', this.state);
     this.handleAddPage = this.handleAddPage.bind(this);
     this.handleTabSelect = this.handleTabSelect.bind(this);
     this.handleTitleChange = this.handleTitleChange.bind(this);
@@ -30,13 +30,26 @@ class EditContent extends Component {
 
   componentDidMount() {
     const pages = this.props.activeSurveyPages;
+    const survey = this.props.activeSurvey;
     if (!pages || !Array.isArray(pages) || pages.length < 1) {
-      this.props.dispatch(addPage(1));
+      const surveyPage = {
+        order: 1,
+        title: 'Page 1',
+      };
+      this.props.dispatch(addPage(survey, surveyPage));
     }
   }
 
   componentDidUpdate() {
     const pages = this.props.activeSurveyPages;
+    const survey = this.props.activeSurvey;
+    if (!pages || !Array.isArray(pages) || pages.length < 1) {
+      const surveyPage = {
+        order: 1,
+        title: 'Page 1',
+      };
+      this.props.dispatch(addPage(survey, surveyPage));
+    }
     if (pages[0] && !pages.find(page => page.order === this.props.activeSurveyPage.order)) {
       this.props.dispatch(setActivePage(pages[0].order));
     }
@@ -48,7 +61,12 @@ class EditContent extends Component {
 
   handleAddPage() {
     const newPageOrder = this.props.activeSurveyPages[this.props.activeSurveyPages.length - 1].order + 1;
-    this.props.dispatch(addPage(newPageOrder));
+    const survey = this.props.activeSurvey;
+    const surveyPage = {
+      order: newPageOrder,
+      title: `Page ${newPageOrder}`,
+    };
+    this.props.dispatch(addPage(survey, surveyPage));
   }
 
   handleSaveClick() {
@@ -64,7 +82,7 @@ class EditContent extends Component {
 
   render() {
     const { props: { activeSurveyPages: pages } } = this;
-
+    console.log('REnder survey pages', pages);
     const pageTabs = pages.map((page) => {
       return (
         <Tab eventKey={page.order} key={page.order} title={page.title}>
